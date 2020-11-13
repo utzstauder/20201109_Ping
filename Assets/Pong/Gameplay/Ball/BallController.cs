@@ -9,6 +9,9 @@ public class BallController : MonoBehaviour
     private Vector3 initialPosition;
 
     public float initialSpeed = 5f;
+    [Range(0, 90f)]
+    public float initialMaxAngle = 45f;
+
     public float deviationScale = 3f;
 
     private void Awake()
@@ -34,7 +37,16 @@ public class BallController : MonoBehaviour
     {
         Vector2 newVector = new Vector2();
 
-        return newVector;
+        newVector.x = Mathf.Sign(Random.Range(-1f, 1f));
+        newVector.y = Random.Range(-1f, 1f);
+
+        // Manuel's solution
+        newVector = new Vector2(
+            x: (Random.Range(-1, 1) >= 0) ? 1 : -1,
+            y: Random.Range(-Mathf.Tan(initialMaxAngle * Mathf.PI / 180), Mathf.Tan(initialMaxAngle * Mathf.PI / 180))
+            );
+
+        return newVector.normalized;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
