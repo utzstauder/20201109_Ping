@@ -35,6 +35,8 @@ public class BallController : MonoBehaviour
 
     Vector2 GetInitialDirection()
     {
+        return Vector2.up; // for testing; remove once done
+
         Vector2 newVector = new Vector2();
 
         newVector.x = Mathf.Sign(Random.Range(-1f, 1f));
