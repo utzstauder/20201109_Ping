@@ -27,7 +27,12 @@ public class BallController : MonoBehaviour
     {
         // rigidbody2D.MovePosition(initialPosition);
         transform.position = initialPosition;
-        rigidbody2D.velocity = Random.insideUnitCircle.normalized * initialSpeed;
+        rigidbody2D.velocity = GetInitialDirection() * initialSpeed;
+    }
+
+    Vector2 GetInitialDirection()
+    {
+        return Random.insideUnitCircle.normalized;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
