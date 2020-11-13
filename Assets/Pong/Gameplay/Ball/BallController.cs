@@ -32,7 +32,9 @@ public class BallController : MonoBehaviour
 
     Vector2 GetInitialDirection()
     {
-        return Random.insideUnitCircle.normalized;
+        Vector2 newVector = new Vector2();
+
+        return newVector;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
