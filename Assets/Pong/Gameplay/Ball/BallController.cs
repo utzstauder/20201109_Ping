@@ -9,6 +9,7 @@ public class BallController : MonoBehaviour
     private Vector3 initialPosition;
 
     public float initialSpeed = 5f;
+    public float deviationScale = 3f;
 
     private void Awake()
     {
@@ -32,5 +33,32 @@ public class BallController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         ResetBall();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            // calculate deviation factor
+            float deviationFactor = transform.position.y - collision.gameObject.transform.position.y;
+
+            // normalize deviationFactor
+            deviationFactor /= (collision.collider.bounds.size.y + collision.otherCollider.bounds.size.y) / 2f;
+
+            // copy existing velocity vector
+            Vector2 newVelocity = rigidbody2D.velocity;
+
+            // modify y-component of velocity vector
+            newVelocity.y += deviationFactor * deviationScale;
+
+            // normalize resulting vector
+            newVelocity.Normalize();
+
+            // "restore" initial velocity
+            newVelocity *= rigidbody2D.velocity.magnitude;
+
+            // set new velocity
+            rigidbody2D.velocity = newVelocity;
+        }
     }
 }
