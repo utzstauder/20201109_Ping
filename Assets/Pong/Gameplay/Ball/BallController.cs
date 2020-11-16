@@ -7,6 +7,7 @@ public class BallController : MonoBehaviour
     private Rigidbody2D rigidbody2D;
 
     private Vector3 initialPosition;
+    private bool started = false;
 
     public float initialSpeed = 5f;
     [Range(0, 90f)]
@@ -24,21 +25,22 @@ public class BallController : MonoBehaviour
         rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
-    private void Start()
+    public void StartBall()
     {
-        ResetBall();
+        rigidbody2D.velocity = GetInitialDirection() * initialSpeed;
+        started = true;
     }
 
-    private void ResetBall()
+    public void StopAndResetBall()
     {
-        // rigidbody2D.MovePosition(initialPosition);
+        rigidbody2D.velocity = Vector2.zero;
         transform.position = initialPosition;
-        rigidbody2D.velocity = GetInitialDirection() * initialSpeed;
+        started = false;
     }
 
     Vector2 GetInitialDirection()
     {
-        return Vector2.up; // for testing; remove once done
+        // return Vector2.up; // for testing; remove once done
 
         Vector2 newVector = new Vector2();
 
@@ -56,7 +58,8 @@ public class BallController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        ResetBall();
+        StopAndResetBall();
+        StartBall();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

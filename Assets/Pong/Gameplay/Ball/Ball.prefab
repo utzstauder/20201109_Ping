@@ -186,8 +186,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialSpeed: 5
-  initialMaxAngle: 0
-  deviationScale: 3
+  initialMaxAngle: 45
+  racketDeviationScale: 3
+  wallDeviationScale: 3
   collisionSpeedMultiplier: 1.1
 --- !u!50 &6203830596977908768
 Rigidbody2D:
