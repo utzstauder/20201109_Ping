@@ -12,7 +12,8 @@ public class BallController : MonoBehaviour
     [Range(0, 90f)]
     public float initialMaxAngle = 45f;
 
-    public float deviationScale = 3f;
+    public float racketDeviationScale = 3f;
+    public float wallDeviationScale = 3f;
 
     public float collisionSpeedMultiplier = 1.1f;
 
@@ -37,7 +38,7 @@ public class BallController : MonoBehaviour
 
     Vector2 GetInitialDirection()
     {
-        //return Vector2.up; // for testing; remove once done
+        return Vector2.up; // for testing; remove once done
 
         Vector2 newVector = new Vector2();
 
@@ -72,7 +73,7 @@ public class BallController : MonoBehaviour
             Vector2 newVelocity = rigidbody2D.velocity;
 
             // modify y-component of velocity vector
-            newVelocity.y += deviationFactor * deviationScale;
+            newVelocity.y += deviationFactor * racketDeviationScale;
 
             // normalize resulting vector
             newVelocity.Normalize();
@@ -82,6 +83,38 @@ public class BallController : MonoBehaviour
 
             // set new velocity
             rigidbody2D.velocity = newVelocity;
+        }
+        else
+        {
+            if (Mathf.Abs(rigidbody2D.velocity.normalized.x) < 0.1f)
+            {
+                // calculate deviation factor
+                float deviationFactor = collision.gameObject.transform.position.x - transform.position.x;
+
+                // normalize deviationFactor
+                deviationFactor /= (collision.collider.bounds.size.x + collision.otherCollider.bounds.size.x) / 2f;
+
+                // help a little in the center of the field
+                if (Mathf.Abs(deviationFactor) < 0.1f)
+                {
+                    deviationFactor = 0.5f * Mathf.Sign(deviationFactor);
+                }
+
+                // copy existing velocity vector
+                Vector2 newVelocity = rigidbody2D.velocity.normalized;
+
+                // modify x-component of velocity vector
+                newVelocity.x = deviationFactor * wallDeviationScale;
+
+                // normalize resulting vector
+                newVelocity.Normalize();
+
+                // "restore" initial velocity
+                newVelocity *= rigidbody2D.velocity.magnitude;
+
+                // set new velocity
+                rigidbody2D.velocity = newVelocity;
+            }
         }
     }
 }
