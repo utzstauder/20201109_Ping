@@ -14,6 +14,8 @@ public class BallController : MonoBehaviour
 
     public float deviationScale = 3f;
 
+    public float collisionSpeedMultiplier = 1.1f;
+
     private void Awake()
     {
         initialPosition = transform.position;
@@ -35,7 +37,7 @@ public class BallController : MonoBehaviour
 
     Vector2 GetInitialDirection()
     {
-        return Vector2.up; // for testing; remove once done
+        //return Vector2.up; // for testing; remove once done
 
         Vector2 newVector = new Vector2();
 
@@ -76,7 +78,7 @@ public class BallController : MonoBehaviour
             newVelocity.Normalize();
 
             // "restore" initial velocity
-            newVelocity *= rigidbody2D.velocity.magnitude;
+            newVelocity *= (rigidbody2D.velocity.magnitude * collisionSpeedMultiplier);
 
             // set new velocity
             rigidbody2D.velocity = newVelocity;

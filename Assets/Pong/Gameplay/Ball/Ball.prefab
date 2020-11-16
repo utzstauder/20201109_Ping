@@ -40,7 +40,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1194048386778482906}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: da60dd60c525151409ffa307be4f4b7e, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -186,6 +186,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialSpeed: 5
+  initialMaxAngle: 0
+  deviationScale: 3
+  collisionSpeedMultiplier: 1.1
 --- !u!50 &6203830596977908768
 Rigidbody2D:
   serializedVersion: 4
