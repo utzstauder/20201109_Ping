@@ -93,13 +93,19 @@ public class ScoreController : MonoBehaviour
     public void GoalPlayer1()
     {
         scorePlayer1++;
-        UpdateUI();
-        EvaluateWinCondition();
+        GoalScored();
     }
 
     public void GoalPlayer2()
     {
         scorePlayer2++;
+        GoalScored();
+    }
+
+    private void GoalScored()
+    {
+        ball.StopAndResetBall();
+        ball.StartBall();
         UpdateUI();
         EvaluateWinCondition();
     }

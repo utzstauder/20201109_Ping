@@ -56,12 +56,6 @@ public class BallController : MonoBehaviour
         return newVector.normalized;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        StopAndResetBall();
-        StartBall();
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
