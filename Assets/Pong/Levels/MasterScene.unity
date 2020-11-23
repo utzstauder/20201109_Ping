@@ -1082,6 +1082,10 @@ PrefabInstance:
       propertyPath: axisName
       value: Player1
       objectReference: {fileID: 0}
+    - target: {fileID: 7937126326985681150, guid: c6be776e728a81e4fab4cf7408d78ca8, type: 3}
+      propertyPath: aiControlled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7937126326985681151, guid: c6be776e728a81e4fab4cf7408d78ca8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.05
